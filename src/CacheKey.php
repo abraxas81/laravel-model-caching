@@ -190,11 +190,11 @@ class CacheKey
 
     protected function getColumnClauses(array $where) : string
     {
-        if ($where["type"] !== "Column") {
+        if ($where["type"] !== "Basic") {
             return "";
         }
 
-        return "-{$where["boolean"]}_{$where["first"]}_{$where["operator"]}_{$where["second"]}";
+        return "-{$where["boolean"]}_{$where["column"]}_{$where["operator"]}_{$where["value"]}";
     }
 
     protected function getInClauses(array $where) : string
@@ -281,7 +281,7 @@ class CacheKey
 
     protected function getOtherClauses(array $where) : string
     {
-        if (in_array($where["type"], ["Exists", "Nested", "NotExists", "Column", "raw", "In", "NotIn"])) {
+        if (in_array($where["type"], ["Exists", "Nested", "NotExists", "Basic", "raw", "In", "NotIn"])) {
             return "";
         }
 
